@@ -67,3 +67,7 @@ INSERT INTO visits (animal_id, vet_id, visit_date) VALUES (7, 2, '2020-02-27');
 INSERT INTO visits (animal_id, vet_id, visit_date) VALUES (7, 2, '2020-08-03');
 INSERT INTO visits (animal_id, vet_id, visit_date) VALUES (6, 3, '2020-05-24');
 INSERT INTO visits (animal_id, vet_id, visit_date) VALUES (6, 1, '2021-01-11');
+
+CREATE INDEX index_vet_id ON visits (vet_id);
+CREATE INDEX index_email ON owners (email);
+CREATE INDEX index_animal_id ON visits (animal_id);
