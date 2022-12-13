@@ -5,7 +5,7 @@ CREATE TABLE patients (
 );
 
 CREATE TABLE medical_histoeries (
-    id INT GENERATED ALWAYS AS IDENTITY,
+    id INT REFERENCES treatments(id),
     admitted_at timestamp NOT NULL,
     patient_id INT REFERENCES patients(id),
     status VARCHAR(30) NOT NULL
@@ -29,7 +29,12 @@ CREATE TABLE invoice_items (
 );
 
 CREATE TABLE treatments (
-    id INT GENERATED ALWAYS AS IDENTITY,
+    id INT REFERENCES medical_histoeries(patient_id),
     type VARCHAR(50) NOT NULL,
     name VARCHAR(50) NOT NULL
 );
+
+CREATE INDEX index_patient_id ON medical_histoeries (patient_id);
+CREATE INDEX index_treatment_id ON invoice_items (treatment_id);
+CREATE INDEX index_invoice_id ON invoice_items (invoice_id);
+CREATE INDEX index_medical_history_id ON invoices (medical_history__id);
