@@ -7,7 +7,7 @@ CREATE TABLE patients (
 CREATE TABLE medical_histoeries (
     id INT GENERATED ALWAYS AS IDENTITY,
     admitted_at timestamp NOT NULL,
-    patient_id INT NOT NULL,
+    patient_id INT REFERENCES patients(id),
     status VARCHAR(30) NOT NULL
 );
 
@@ -16,7 +16,7 @@ CREATE TABLE invoices (
     total_amount DECIMAL NOT NULL,
     generated_at timestamp NOT NULL,
     payed_at timestamp NOT NULL,
-    medical_history__id INT NOT NULL
+    medical_history__id INT REFERENCES medical_histoeries(id)
 );
 
 CREATE TABLE invoice_items (
@@ -24,8 +24,8 @@ CREATE TABLE invoice_items (
     unit_price DECIMAL NOT NULL,
     quantity INT NOT NULL,
     total_price DECIMAL NOT NULL,
-    invoice_id INT NOT NULL,
-    treatment_id INT NOT NULL
+    invoice_id INT REFERENCES invoices(id),
+    treatment_id INT REFERENCES treatments(id)
 );
 
 CREATE TABLE treatments (
