@@ -34,7 +34,15 @@ CREATE TABLE treatments (
     name VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE joined (
+    medical_history_id INTEGER REFERENCES medical_histoeries(id),
+    treatments_id INTEGER REFERENCES treatments(id),
+    PRIMARY KEY (treatment_id, medical_history_id)
+);
+
 CREATE INDEX index_patient_id ON medical_histoeries (patient_id);
 CREATE INDEX index_treatment_id ON invoice_items (treatment_id);
 CREATE INDEX index_invoice_id ON invoice_items (invoice_id);
 CREATE INDEX index_medical_history_id ON invoices (medical_history__id);
+CREATE INDEX index_medical_histories_id ON joined (medical_history_id);
+CREATE INDEX index_treatments_id ON joined (treatments_id);
